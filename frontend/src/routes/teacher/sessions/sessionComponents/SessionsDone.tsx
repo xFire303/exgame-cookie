@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 export const SessionsDone: React.FC<{
   teacherClass: string;
-  date: string;
+  date: string | undefined;
 }> = ({ teacherClass, date }) => {
   const navigate = useNavigate();
   return (

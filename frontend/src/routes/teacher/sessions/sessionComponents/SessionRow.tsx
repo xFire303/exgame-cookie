@@ -2,7 +2,7 @@ import { Button } from "@mui/joy";
 import classes from "../sessions.module.css";
 export const SessionRow: React.FC<{
   teacherClass: string;
-  date: string;
+  date: string | undefined;
 }> = ({ teacherClass, date }) => {
   return (
     <tr>

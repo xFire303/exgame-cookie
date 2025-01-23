@@ -16,7 +16,23 @@ export const Sessions: React.FC = () => {
   const exam = exams?.find((exam) => exam._id === id);
   const navigate = useNavigate();
   const fetch = useFetch();
-  const [sessions, setSessions] = useState<Session[]>();
+  const [sessions, setSessions] = useState<Session[]>([]);
+
+  const sessionsToBeDone: Session[] = [];
+  const sessionsDone: Session[] = [];
+
+  const today = new Date();
+  
+  const formatDate = (date?: Date) => {
+    return (
+      date &&
+      new Date(date).toLocaleDateString("it-IT", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    );
+  };
 
   useEffect(() => {
     fetch(`${config.API_BASEPATH}/sessions/${id}`)
@@ -24,6 +40,17 @@ export const Sessions: React.FC = () => {
       .then(setSessions)
       .catch(console.error);
   }, [id]);
+
+  ((sessions: Session[]) => {
+    sessions.forEach(session => {
+      if (new Date(session.start_date)> today && new Date(session.start_time) >= today) {
+        sessionsToBeDone.push(session);
+      }else{
+        sessionsDone.push(session);
+      }
+    });
+    return [sessionsToBeDone, sessionsDone];
+  })(sessions);
 
   return (
     <Stack>
@@ -37,10 +64,10 @@ export const Sessions: React.FC = () => {
       </Typography>
       <Table aria-label="basic table">
         <tbody>
-          {sessions?.map((session) => (
+          {sessionsToBeDone?.map((session) => (
             <SessionRow
               teacherClass={session.student_class}
-              date={session.start_date.toString()}
+              date={formatDate(session.start_date)}
             ></SessionRow>
           ))}
         </tbody>
@@ -69,10 +96,12 @@ export const Sessions: React.FC = () => {
       </Typography>
       <Table aria-label="basic table">
         <tbody>
-          <SessionsDone
-            teacherClass="Pixel"
-            date="12 ottobre 2025"
-          ></SessionsDone>
+        {sessionsDone?.map((session) => (
+            <SessionsDone
+              teacherClass={session.student_class}
+              date={formatDate(session.start_date)}
+            ></SessionsDone>
+          ))}
         </tbody>
       </Table>
       <Box
