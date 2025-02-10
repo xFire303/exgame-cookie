@@ -10,7 +10,7 @@ export const SessionRow: React.FC<{
       <th>{teacherClass}</th>
       <th>
         <div className={classes.buttonContainer}>
-          <Button size="sm">inizia</Button>
+          <Button size="sm">Inizia</Button>
           <Button size="sm">Modifica</Button>
         </div>
       </th>

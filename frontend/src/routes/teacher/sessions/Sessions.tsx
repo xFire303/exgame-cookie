@@ -100,6 +100,7 @@ export const Sessions: React.FC = () => {
             <SessionsDone
               teacherClass={session.student_class}
               date={formatDate(session.start_date)}
+              sessionId={session._id}
             ></SessionsDone>
           ))}
         </tbody>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 export const StudentSubscriptionRow: React.FC<{
   first_name: string;
   last_name: string;
-  results: string;
+  results: number;
 }> = ({ first_name, last_name, results }) => {
   const navigate = useNavigate();
   return (

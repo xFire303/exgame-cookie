@@ -4,7 +4,8 @@ import { useNavigate } from "react-router";
 export const SessionsDone: React.FC<{
   teacherClass: string;
   date: string | undefined;
-}> = ({ teacherClass, date }) => {
+  sessionId: string | undefined;
+}> = ({ teacherClass, sessionId , date}) => {
   const navigate = useNavigate();
   return (
     <tr>
@@ -13,7 +14,7 @@ export const SessionsDone: React.FC<{
       <th>
         <Button
           size="sm"
-          onClick={() => navigate("/teacher/subscriptions/{date}")}
+          onClick={() => navigate(`/teacher/subscriptions/${sessionId}`)}
         >
           Visualizza
         </Button>

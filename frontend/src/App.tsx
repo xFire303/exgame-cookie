@@ -42,9 +42,9 @@ function App() {
             <Route path="exam/:id/sessions" element={<Sessions />} />
             <Route path="exam/:id/sessions/add" element={<NewSession />} />
             <Route path="subscriptions" element={<Subscriptions />} />
-            <Route path="subscriptions/:date" element={<SessionReport />} />
+            <Route path="subscriptions/:sessionId" element={<SessionReport />} />
             <Route
-              path="subscriptions/:date/:id"
+              path="subscriptions/:sessionId/:id"
               element={<SubscriptionReport />}
             />
             <Route

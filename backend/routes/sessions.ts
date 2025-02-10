@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { Session } from "../../api-types";
-import { addSession, getSessions } from "../services/session";
+import { addSession, getSession, getSessions } from "../services/session";
 import { AuthenticatedContext } from "../types/session";
 import { authMiddleware } from "./auth";
 
@@ -9,6 +9,10 @@ const router = new Router<unknown, AuthenticatedContext>({
 });
 
 router.use(authMiddleware());
+
+router.get("/:sessionId", async (ctx) => {
+  ctx.body = await getSession(ctx.params.sessionId, ctx);
+});
 
 router.get("/:examId", async (ctx) => {
   ctx.body = await getSessions(ctx.params.examId, ctx);

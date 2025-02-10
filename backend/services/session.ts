@@ -18,6 +18,15 @@ const sessionSchema = new DB.Schema(
 
 const sessionModel = DB.model("session", sessionSchema);
 
+export const getSession = async (sessionId: string, ctx) => {
+  const loggedUser = ctx.session.user;
+
+  switch (loggedUser.role) {
+    case "teacher":
+      return sessionModel.findById(sessionId);
+  }
+}
+
 export const getSessions = async (examId: string, ctx) => {
   const loggedUser = ctx.session.user;
 
